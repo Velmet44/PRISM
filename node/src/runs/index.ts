@@ -287,9 +287,29 @@ export class FencingEpoch {
     const db = this.db;
     if (db !== null) {
       const at = this.now();
-      withTransaction(db, () => {
-        db.prepare(`INSERT INTO ${T_FENCING}(bumped_at) VALUES (?);`).run(at);
-      });
+      if (db.isTransaction) {
+        // Nested inside an outer transaction (e.g. restartFromCheckpoint):
+        // use an explicit SAVEPOINT so the bump stays atomic with the
+        // enclosing write instead of throwing (storage.withTransaction
+        // forbids nested BEGIN). Follows the SAVEPOINT guidance in storage.
+        db.exec("SAVEPOINT prism_fencing_bump;");
+        try {
+          db.prepare(`INSERT INTO ${T_FENCING}(bumped_at) VALUES (?);`).run(at);
+          db.exec("RELEASE prism_fencing_bump;");
+        } catch (err) {
+          try {
+            db.exec("ROLLBACK TO prism_fencing_bump;");
+            db.exec("RELEASE prism_fencing_bump;");
+          } catch {
+            // ignore secondary rollback failures
+          }
+          throw err;
+        }
+      } else {
+        withTransaction(db, () => {
+          db.prepare(`INSERT INTO ${T_FENCING}(bumped_at) VALUES (?);`).run(at);
+        });
+      }
       const row = db
         .prepare(`SELECT MAX(epoch) AS epoch FROM ${T_FENCING};`)
         .get() as { epoch: number | null };
