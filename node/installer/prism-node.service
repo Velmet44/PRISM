@@ -1,0 +1,44 @@
+# PRISM Node systemd service.
+#
+# Auto-starts on boot (§7.1) and restarts on failure. Reboot recovery (§7.2):
+# without an unattended OS-backed KEK the Node serves status as
+# DEGRADED/secrets_locked until local unlock via Node Manager.
+#
+# WSL2 notes (§8.2): requires systemd enabled in the WSL distribution
+# (/etc/wsl.conf [boot] systemd=true) plus a Windows-side trigger that
+# starts the distribution on boot/login. The unit tolerates WSL instances
+# being stopped and restarted: Restart=always with backoff, no hard
+# dependency on graphical or network-online targets.
+
+[Unit]
+Description=PRISM Node (self-hosted AI workspace runtime)
+Documentation=https://github.com/prism/prism
+After=network.target
+Wants=network.target
+
+[Service]
+Type=simple
+User=prism
+Group=prism
+UMask=0077
+WorkingDirectory=/var/lib/prism
+Environment=PRISM_DATA_ROOT=/var/lib/prism
+Environment=NODE_ENV=production
+ExecStart=/usr/local/bin/prism-node --data-root /var/lib/prism
+Restart=always
+RestartSec=5
+# Bound restarts so a persistently failing Node surfaces instead of spinning.
+StartLimitIntervalSec=300
+StartLimitBurst=5
+# File-descriptor and task limits for agent workers + supervisor IPC.
+LimitNOFILE=65536
+TasksMax=4096
+# Hardening: the control plane needs no privileges beyond its data root.
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/prism
+
+[Install]
+WantedBy=multi-user.target

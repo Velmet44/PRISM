@@ -33,9 +33,11 @@ pnpm test
 
 ## Repo layout
 
-- `packages/{schemas,protocol,shared,client}` — the only implemented code
-  (Stage 0). `web/`, `node/`, `models/` are empty scaffold dirs kept alive
-  by leaf `.gitkeep` files; delete the `.gitkeep` when a directory gains
+- `packages/{schemas,protocol,shared,client}` — Stage 0 contracts.
+  `node/` holds Stage 1 (bootable Node + Node Manager) plus Stage 2
+  lifecycle work in progress; `web/` holds Stage 2 UI work in progress;
+  `models/` is still an empty scaffold dir. Leaf dirs without real files
+  stay alive via `.gitkeep`; delete the `.gitkeep` when a directory gains
   real files (never keep both).
 - `node/` is the future authoritative backend; `web/` must never own
   canonical state (§53.1). Don't invert this when scaffolding.

@@ -8,6 +8,34 @@ importers:
 
   .: {}
 
+  node:
+    dependencies:
+      '@prism/protocol':
+        specifier: workspace:*
+        version: link:../packages/protocol
+      '@prism/schemas':
+        specifier: workspace:*
+        version: link:../packages/schemas
+      '@prism/shared':
+        specifier: workspace:*
+        version: link:../packages/shared
+      hash-wasm:
+        specifier: ^4.12.0
+        version: 4.12.0
+      kysely:
+        specifier: ^0.28.2
+        version: 0.28.17
+    devDependencies:
+      '@types/node':
+        specifier: ^22.9.0
+        version: 22.20.5
+      typescript:
+        specifier: ^5.9.2
+        version: 5.9.3
+      vitest:
+        specifier: ^3.0.0
+        version: 3.2.7(@types/node@22.20.5)
+
   packages/client:
     dependencies:
       '@noble/curves':
@@ -70,6 +98,28 @@ importers:
 
   packages/shared:
     devDependencies:
+      typescript:
+        specifier: ^5.9.2
+        version: 5.9.3
+      vitest:
+        specifier: ^3.0.0
+        version: 3.2.7(@types/node@22.20.5)
+
+  web:
+    dependencies:
+      '@prism/client':
+        specifier: workspace:*
+        version: link:../packages/client
+      '@prism/protocol':
+        specifier: workspace:*
+        version: link:../packages/protocol
+      '@prism/schemas':
+        specifier: workspace:*
+        version: link:../packages/schemas
+    devDependencies:
+      '@types/node':
+        specifier: ^22.9.0
+        version: 22.20.5
       typescript:
         specifier: ^5.9.2
         version: 5.9.3
@@ -476,8 +526,15 @@ packages:
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
     os: [darwin]
 
+  hash-wasm@4.12.0:
+    resolution: {integrity: sha512-+/2B2rYLb48I/evdOIhP+K/DD2ca2fgBjp6O+GBEnCDk2e4rpeXIK8GvIyRPjTezgmWn9gmKwkQjjx6BtqDHVQ==}
+
   js-tokens@9.0.1:
     resolution: {integrity: sha512-mxa9E9ITFOt0ban3j6L5MpjwegGz6lBQmM1IJkWeBZGcMxto50+eWdjC/52xDbS2vy0k7vIMK0Fe2wfL9OQSpQ==}
+
+  kysely@0.28.17:
+    resolution: {integrity: sha512-nbD8lB9EB3wNdMhOCdx5Li8DxnLbvKByylRLcJ1h+4SkrowVeECAyZlyiKMThF7xFdRz0jSQ2MoJr+wXux2y0Q==}
+    engines: {node: '>=20.0.0'}
 
   loupe@3.2.1:
     resolution: {integrity: sha512-CdzqowRJCeLU72bHvWqwRBBlLcMEtIvGrlvef74kMnV2AolS9Y8xUv1I0U/MNAWMhBlKIoyuEgoJ0t/bbwHbLQ==}
@@ -933,7 +990,11 @@ snapshots:
   fsevents@2.3.3:
     optional: true
 
+  hash-wasm@4.12.0: {}
+
   js-tokens@9.0.1: {}
+
+  kysely@0.28.17: {}
 
   loupe@3.2.1: {}
 

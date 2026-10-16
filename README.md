@@ -36,7 +36,13 @@ See `docs/PRISM_V1_SPEC.md` §3 for the full module layout.
 
 ## Status
 
-Early scaffold. Folders and spec only. No runtime implementation yet.
+Stage 1 done (bootable Node + Node Manager: config, storage/SQLite WAL,
+identity, auth/devices, separated public/NM listeners, installer,
+updates stubs). Stage 2 implemented (agent/task/run lifecycle with
+fencing + idempotency, cognition loop with taint-preserving compaction,
+events/outbox/replay, Ollama model manager, pairing + WS multiplex,
+LAN-TLS/rate-limit, Web UI view-models) — build/typecheck/test green;
+live E2E exit (restart mid-run and reconcile on Linux + WSL2) pending.
 
 Implementation order follows spec §57: shared protocol/schemas, state machines, storage/event log, auth, policy, isolation, then agent runtime and surrounding systems.
 

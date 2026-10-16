@@ -1,0 +1,32 @@
+{
+  "name": "@prism/node",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc --noEmit -p tsconfig.typecheck.json",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@prism/protocol": "workspace:*",
+    "@prism/schemas": "workspace:*",
+    "@prism/shared": "workspace:*",
+    "hash-wasm": "^4.12.0",
+    "kysely": "^0.28.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.9.0",
+    "typescript": "^5.9.2",
+    "vitest": "^3.0.0"
+  }
+}

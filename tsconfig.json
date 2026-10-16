@@ -8,6 +8,8 @@
     { "path": "./packages/schemas" },
     { "path": "./packages/protocol" },
     { "path": "./packages/shared" },
-    { "path": "./packages/client" }
+    { "path": "./packages/client" },
+    { "path": "./node" },
+    { "path": "./web" }
   ]
 }

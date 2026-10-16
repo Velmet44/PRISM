@@ -1,0 +1,15 @@
+{
+  "extends": "../tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "rootDir": ".",
+    "composite": true,
+    "types": ["node"]
+  },
+  "include": ["app/**/*", "lib/**/*", "state/**/*", "features/**/*"],
+  "references": [
+    { "path": "../packages/schemas" },
+    { "path": "../packages/protocol" },
+    { "path": "../packages/client" }
+  ]
+}
