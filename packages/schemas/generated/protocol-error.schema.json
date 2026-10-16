@@ -1,0 +1,57 @@
+{
+  "$ref": "#/definitions/protocol-error",
+  "definitions": {
+    "protocol-error": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "enum": [
+            "INVALID_ARGUMENT",
+            "UNAUTHENTICATED",
+            "UNAUTHORIZED",
+            "POLICY_DENIED",
+            "APPROVAL_REQUIRED",
+            "APPROVAL_INVALID",
+            "RESOURCE_UNAVAILABLE",
+            "QUOTA_EXCEEDED",
+            "RATE_LIMITED",
+            "PROVIDER_UNAVAILABLE",
+            "TIMEOUT",
+            "DEADLINE_EXCEEDED",
+            "WORKER_FAILURE",
+            "RECOVERY_REQUIRED",
+            "SIDE_EFFECT_UNCERTAIN",
+            "RESYNC_REQUIRED",
+            "SECRETS_LOCKED",
+            "CONFLICT",
+            "NOT_FOUND",
+            "INTEGRITY_FAILURE",
+            "UPDATE_REJECTED",
+            "UNSUPPORTED"
+          ]
+        },
+        "message": {
+          "type": "string",
+          "minLength": 1
+        },
+        "retryable": {
+          "type": "boolean"
+        },
+        "correlation_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "remediation": {}
+      },
+      "required": [
+        "code",
+        "message",
+        "retryable",
+        "correlation_id"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

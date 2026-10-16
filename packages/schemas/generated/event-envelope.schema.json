@@ -1,0 +1,153 @@
+{
+  "$ref": "#/definitions/event-envelope",
+  "definitions": {
+    "event-envelope": {
+      "type": "object",
+      "properties": {
+        "event_id": {
+          "type": "string",
+          "minLength": 1,
+          "description": "EventId"
+        },
+        "sequence": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "event_type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "event_version": {
+          "type": "integer",
+          "exclusiveMinimum": 0
+        },
+        "node_id": {
+          "type": "string",
+          "minLength": 1,
+          "description": "NodeId"
+        },
+        "owner_id": {
+          "type": "string",
+          "minLength": 1,
+          "description": "OwnerId"
+        },
+        "agent_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1,
+              "description": "AgentId"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "AgentId"
+        },
+        "task_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1,
+              "description": "TaskId"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "TaskId"
+        },
+        "run_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1,
+              "description": "RunId"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "RunId"
+        },
+        "step_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1,
+              "description": "StepId"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "StepId"
+        },
+        "step_attempt_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1,
+              "description": "StepAttemptId"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "StepAttemptId"
+        },
+        "causation_id": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/event-envelope/properties/event_id"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "EventId"
+        },
+        "correlation_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "occurred_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "payload_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "security_class": {
+          "type": "string",
+          "enum": [
+            "normal",
+            "sensitive",
+            "security_audit"
+          ]
+        }
+      },
+      "required": [
+        "event_id",
+        "sequence",
+        "event_type",
+        "event_version",
+        "node_id",
+        "owner_id",
+        "agent_id",
+        "task_id",
+        "run_id",
+        "step_id",
+        "step_attempt_id",
+        "causation_id",
+        "correlation_id",
+        "occurred_at",
+        "payload_ref",
+        "security_class"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

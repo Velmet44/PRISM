@@ -1,0 +1,40 @@
+{
+  "$ref": "#/definitions/approval-sig-doc",
+  "definitions": {
+    "approval-sig-doc": {
+      "type": "object",
+      "properties": {
+        "node_id": {
+          "type": "string",
+          "minLength": 1,
+          "description": "NodeId"
+        },
+        "approval_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "action_hash": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "approval_expiry": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "nonce": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{32}$"
+        }
+      },
+      "required": [
+        "node_id",
+        "approval_id",
+        "action_hash",
+        "approval_expiry",
+        "nonce"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

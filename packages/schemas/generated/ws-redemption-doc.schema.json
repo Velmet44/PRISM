@@ -1,0 +1,50 @@
+{
+  "$ref": "#/definitions/ws-redemption-doc",
+  "definitions": {
+    "ws-redemption-doc": {
+      "type": "object",
+      "properties": {
+        "node_id": {
+          "type": "string",
+          "minLength": 1,
+          "description": "NodeId"
+        },
+        "session_id": {
+          "type": "string",
+          "minLength": 1,
+          "description": "SessionId"
+        },
+        "device_id": {
+          "type": "string",
+          "minLength": 1,
+          "description": "DeviceId"
+        },
+        "ticket_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "nonce": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{32}$"
+        },
+        "requested_scopes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "required": [
+        "node_id",
+        "session_id",
+        "device_id",
+        "ticket_sha256",
+        "nonce",
+        "requested_scopes"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

@@ -1,0 +1,137 @@
+{
+  "$ref": "#/definitions/capability-record",
+  "definitions": {
+    "capability-record": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "version": {
+          "type": "integer",
+          "exclusiveMinimum": 0
+        },
+        "risk_tier": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 5
+        },
+        "scope_schema": {
+          "type": "string",
+          "minLength": 1
+        },
+        "delegable": {
+          "type": "boolean"
+        },
+        "caller_contexts": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "resource_requirements": {
+          "type": "string",
+          "minLength": 1
+        },
+        "network_requirements": {
+          "type": "string",
+          "minLength": 1
+        },
+        "approval_mode": {
+          "type": "string",
+          "minLength": 1
+        },
+        "minimum_approval_assurance": {
+          "type": "string",
+          "minLength": 1
+        },
+        "legal_policy_modes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "ask",
+              "always",
+              "ai",
+              "never"
+            ]
+          }
+        },
+        "taint_sensitivity": {
+          "type": "string",
+          "minLength": 1
+        },
+        "observability": {
+          "type": "object",
+          "properties": {
+            "dest": {
+              "type": "string",
+              "enum": [
+                "visible",
+                "opaque"
+              ]
+            },
+            "method": {
+              "$ref": "#/definitions/capability-record/properties/observability/properties/dest"
+            },
+            "query_schema": {
+              "$ref": "#/definitions/capability-record/properties/observability/properties/dest"
+            },
+            "body": {
+              "$ref": "#/definitions/capability-record/properties/observability/properties/dest"
+            },
+            "credential_use": {
+              "$ref": "#/definitions/capability-record/properties/observability/properties/dest"
+            },
+            "provenance": {
+              "$ref": "#/definitions/capability-record/properties/observability/properties/dest"
+            }
+          },
+          "required": [
+            "dest",
+            "method",
+            "query_schema",
+            "body",
+            "credential_use",
+            "provenance"
+          ],
+          "additionalProperties": false
+        },
+        "side_effect_class": {
+          "type": "string",
+          "minLength": 1
+        },
+        "secret_use": {
+          "type": "string",
+          "minLength": 1
+        },
+        "audit_classification": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "id",
+        "version",
+        "risk_tier",
+        "scope_schema",
+        "delegable",
+        "caller_contexts",
+        "resource_requirements",
+        "network_requirements",
+        "approval_mode",
+        "minimum_approval_assurance",
+        "legal_policy_modes",
+        "taint_sensitivity",
+        "observability",
+        "side_effect_class",
+        "secret_use",
+        "audit_classification"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

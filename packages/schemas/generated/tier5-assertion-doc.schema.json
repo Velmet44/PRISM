@@ -1,0 +1,64 @@
+{
+  "$ref": "#/definitions/tier5-assertion-doc",
+  "definitions": {
+    "tier5-assertion-doc": {
+      "type": "object",
+      "properties": {
+        "node_id": {
+          "type": "string",
+          "minLength": 1,
+          "description": "NodeId"
+        },
+        "challenge_id": {
+          "type": "string",
+          "minLength": 1,
+          "description": "ChallengeId"
+        },
+        "session_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "action_hash": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "os_principal": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^linux-uid:\\d+$"
+            },
+            {
+              "type": "string",
+              "pattern": "^windows-sid:.+$"
+            }
+          ]
+        },
+        "nonce": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{32}$"
+        },
+        "issued_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "expires_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "node_id",
+        "challenge_id",
+        "session_id",
+        "action_hash",
+        "os_principal",
+        "nonce",
+        "issued_at",
+        "expires_at"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

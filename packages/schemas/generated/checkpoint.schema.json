@@ -1,0 +1,136 @@
+{
+  "$ref": "#/definitions/checkpoint",
+  "definitions": {
+    "checkpoint": {
+      "type": "object",
+      "properties": {
+        "run_task_state_version": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "completed_step_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "completed_attempt_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "next_step": {
+          "type": "string",
+          "minLength": 1
+        },
+        "context_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "memory_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "workspace_snapshot": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "sha256": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{64}$"
+              },
+              "size": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "mtime_ns": {
+                "type": "integer",
+                "minimum": 0
+              }
+            },
+            "required": [
+              "sha256",
+              "size",
+              "mtime_ns"
+            ],
+            "additionalProperties": false
+          },
+          "propertyNames": {
+            "minLength": 1
+          }
+        },
+        "outstanding_fs_intents": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "temp_path": {
+                "type": "string",
+                "minLength": 1
+              },
+              "final_path": {
+                "type": "string",
+                "minLength": 1
+              },
+              "expected_sha256": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{64}$"
+              }
+            },
+            "required": [
+              "temp_path",
+              "final_path",
+              "expected_sha256"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "outstanding_approvals": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "resource_requirements": {
+          "type": "string",
+          "minLength": 1
+        },
+        "idempotency_receipts": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "reconciliation_states": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "required": [
+        "run_task_state_version",
+        "completed_step_ids",
+        "completed_attempt_ids",
+        "next_step",
+        "context_ref",
+        "memory_ref",
+        "workspace_snapshot",
+        "outstanding_fs_intents",
+        "outstanding_approvals",
+        "resource_requirements",
+        "idempotency_receipts",
+        "reconciliation_states"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

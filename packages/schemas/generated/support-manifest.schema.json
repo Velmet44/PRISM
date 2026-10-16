@@ -1,0 +1,103 @@
+{
+  "$ref": "#/definitions/support-manifest",
+  "definitions": {
+    "support-manifest": {
+      "type": "object",
+      "properties": {
+        "manifest_version": {
+          "type": "integer",
+          "exclusiveMinimum": 0
+        },
+        "prism_version": {
+          "type": "string",
+          "pattern": "^\\d+\\.\\d+\\.\\d+$"
+        },
+        "combinations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "os_distro_release": {
+                "type": "string",
+                "minLength": 1
+              },
+              "arch": {
+                "type": "string",
+                "enum": [
+                  "x86_64",
+                  "aarch64"
+                ]
+              },
+              "kernel_floor": {
+                "type": "string",
+                "minLength": 1
+              },
+              "systemd_version": {
+                "type": "string",
+                "minLength": 1
+              },
+              "runtime_name_version": {
+                "type": "string",
+                "minLength": 1
+              },
+              "workspace_backend": {
+                "type": "string",
+                "enum": [
+                  "btrfs-subvolume",
+                  "per-agent-mount",
+                  "per-agent-image"
+                ]
+              },
+              "helper_auth_mode": {
+                "type": "string",
+                "enum": [
+                  "linux-pam",
+                  "windows-secure-desktop"
+                ]
+              },
+              "secret_unlock_mode": {
+                "type": "string",
+                "enum": [
+                  "os-backed",
+                  "passphrase"
+                ]
+              },
+              "required_config": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            },
+            "required": [
+              "os_distro_release",
+              "arch",
+              "kernel_floor",
+              "systemd_version",
+              "runtime_name_version",
+              "workspace_backend",
+              "helper_auth_mode",
+              "secret_unlock_mode",
+              "required_config"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 1
+        },
+        "evidence_bundle": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "manifest_version",
+        "prism_version",
+        "combinations",
+        "evidence_bundle"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

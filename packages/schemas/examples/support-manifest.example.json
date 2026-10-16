@@ -1,0 +1,51 @@
+{
+  "manifest_version": 1,
+  "prism_version": "0.1.0",
+  "combinations": [
+    {
+      "os_distro_release": "ubuntu-24.04",
+      "arch": "x86_64",
+      "kernel_floor": "6.8",
+      "systemd_version": "255",
+      "runtime_name_version": "podman-4.9-rootless",
+      "workspace_backend": "btrfs-subvolume",
+      "helper_auth_mode": "linux-pam",
+      "secret_unlock_mode": "os-backed",
+      "required_config": ["cgroupv2-delegated", "userns-subuid", "openat2"]
+    },
+    {
+      "os_distro_release": "ubuntu-24.04",
+      "arch": "aarch64",
+      "kernel_floor": "6.8",
+      "systemd_version": "255",
+      "runtime_name_version": "podman-4.9-rootless",
+      "workspace_backend": "btrfs-subvolume",
+      "helper_auth_mode": "linux-pam",
+      "secret_unlock_mode": "os-backed",
+      "required_config": ["cgroupv2-delegated", "userns-subuid", "openat2"]
+    },
+    {
+      "os_distro_release": "debian-12",
+      "arch": "x86_64",
+      "kernel_floor": "6.1",
+      "systemd_version": "252",
+      "runtime_name_version": "podman-4.3-rootless",
+      "workspace_backend": "per-agent-mount",
+      "helper_auth_mode": "linux-pam",
+      "secret_unlock_mode": "passphrase",
+      "required_config": ["cgroupv2-delegated", "userns-subuid", "openat2"]
+    },
+    {
+      "os_distro_release": "wsl2-ubuntu-24.04",
+      "arch": "x86_64",
+      "kernel_floor": "5.15-wsl2",
+      "systemd_version": "255",
+      "runtime_name_version": "podman-4.9-rootless",
+      "workspace_backend": "per-agent-mount",
+      "helper_auth_mode": "windows-secure-desktop",
+      "secret_unlock_mode": "passphrase",
+      "required_config": ["wsl-systemd", "wsl-localhost-forwarding", "openat2"]
+    }
+  ],
+  "evidence_bundle": "ci/stage0-contracts"
+}

@@ -1,0 +1,39 @@
+{
+  "$ref": "#/definitions/snapshot-row",
+  "definitions": {
+    "snapshot-row": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "H": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "filter_hash": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "expires_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "payload_ref": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "id",
+        "H",
+        "filter_hash",
+        "expires_at",
+        "payload_ref"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}
