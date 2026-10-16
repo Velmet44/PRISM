@@ -42,8 +42,25 @@ Implementation order follows spec §57: shared protocol/schemas, state machines,
 
 ## Development (Stage 0)
 
-Prereqs: Node.js 22 (`nvm use`), pnpm 9.15.9, Rust stable (see
-`rust-toolchain.toml`).
+Supported dev platforms: Ubuntu 24.04, Debian 12, Windows 10/11
+(plus WSL2 Ubuntu for the full Node runtime later). All scripts are plain
+`pnpm`/`tsc`/`vitest`/`node` invocations with no shell scripts, so the
+same commands work everywhere.
+
+### Prereqs per OS
+
+| Tool | Ubuntu / Debian | Windows |
+|---|---|---|
+| Node.js 22 | `fnm install 22` (or distro package) | `winget install fnm` then `fnm install 22` |
+| pnpm 9.15.9 | `npm install --global pnpm@9.15.9` | same (see note below) |
+| Rust | `rustup` honors `rust-toolchain.toml` | same via `rustup-init` |
+| Debian only | `apt-get install git curl ca-certificates` | n/a |
+
+Windows note: prefer `npm install --global` over `corepack` for pnpm. If
+PowerShell blocks `pnpm.ps1`, run once as the current user:
+`Set-ExecutionPolicy -Scope CurrentUser RemoteSigned`.
+
+### Commands
 
 ```sh
 pnpm install
@@ -52,6 +69,9 @@ pnpm typecheck
 pnpm test         # contract suites incl. §58.2 transition matrix
 pnpm --filter @prism/schemas export:json  # regenerate generated/*.schema.json
 ```
+
+CI runs the same four steps on Ubuntu 24.04, a Debian 12 container, and
+Windows (`contracts-ubuntu`, `contracts-debian`, `contracts-windows`).
 
 Contracts live in `packages/schemas` (Zod source of truth),
 `packages/protocol` (endpoints, headers, `prism.v1`, negotiation),
